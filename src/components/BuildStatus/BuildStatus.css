@@ -1,0 +1,39 @@
+.build-status {
+    position: absolute;
+    bottom: 0;
+}
+
+.build-logo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 230px;
+}
+
+.build-message-container {
+    position: absolute;
+    left: 235px;
+    bottom: 25px;
+    width: 470px;
+}
+
+h1 {
+    position: absolute;
+    left: 310px;
+    bottom: 110px;
+    width: 355px;
+    font-weight: bold;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+}
+
+.build-message {
+    position: absolute;
+    left: 310px;
+    bottom: 30px;
+    width: 355px;
+    min-height: 65px;
+    max-height: 65px;
+    line-height: 2.1rem;
+    overflow: hidden;
+}
