@@ -5,8 +5,7 @@ import BuildStatus from './components/BuildStatus/BuildStatus';
 
 function App() {
   const [showBuildStatus, setShowBuildStatus] = useState(false);
-  const [reverse, setReverse]= useState(false);
-  const [delay, setDelay] = useState(3000);
+  const [reverse, setReverse]= useState(false);  
   const animationProps = useSpring({ 
     from: {
       opacity: 0,
@@ -14,7 +13,7 @@ function App() {
     to: { 
       opacity: 1,
     },
-    delay,
+    delay: 3000,
     reverse
   });
 
@@ -27,7 +26,6 @@ function App() {
   useEffect(() => {
     if (showBuildStatus) {
       setReverse(true);
-      // setDelay(3000);
     }    
   }, [showBuildStatus])
 
