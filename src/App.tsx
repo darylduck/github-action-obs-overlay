@@ -1,48 +1,40 @@
-import { useEffect,useState } from 'react';
-import { useSpring, animated } from '@react-spring/web'
+import { useEffect, useState } from "react";
+import useWebSocket from "react-use-websocket";
 
-import BuildStatus from './components/BuildStatus/BuildStatus';
+import BuildStatus from "./components/BuildStatus/BuildStatus";
+
+const SOCKET_URL_ONE = "ws://localhost:8080";
 
 function App() {
-  const [showBuildStatus, setShowBuildStatus] = useState(false);
-  const [reverse, setReverse]= useState(false);  
-  const animationProps = useSpring({ 
-    from: {
-      opacity: 0,
-    },
-    to: { 
-      opacity: 1,
-    },
-    delay: 3000,
-    reverse
+  const [showMessage, setShowMessage] = useState(false);
+  const [message, setMessage] = useState<{ success: boolean }>();
+
+  // Listen for a websocket message, and on message show either good or bad.
+  const onMessage = (message: any) => {
+    setMessage(JSON.parse(message.data));
+    setShowMessage(true);
+  };
+
+  useWebSocket(SOCKET_URL_ONE, {
+    share: true,
+    onMessage: onMessage
   });
 
   useEffect(() => {
-    setTimeout(() => {
-      setShowBuildStatus(true);
-    }, 3000);
-  }, []);
+    if (showMessage) {
+      setTimeout(() => {
+        setShowMessage(false);
+      }, 10000);
+    }
+  }, [showMessage])
 
-  useEffect(() => {
-    if (showBuildStatus) {
-      setReverse(true);
-    }    
-  }, [showBuildStatus])
-
-  // if (showBuildStatus) {
-  //   return (
-      
-  //   );
-  // }
-
-  return <animated.div style={animationProps}>
-  <BuildStatus 
-    heading="Build Failed!!!"
-    message="There appears to be an issue with the latest push to the {branchName} branch. Please review and fix the build."
-    statusLogoAlt="Build Failed"
-    statusMessageLogoAlt="Build Failed Dialogue"
-    status="failure" />
-</animated.div>;
+  return showMessage ? <BuildStatus
+            heading={'Build Failed!!!'}
+            message="There appears to be an issue with the latest push to the {branchName} branch. Please review and fix the build."
+            statusLogoAlt="Build Failed"
+            statusMessageLogoAlt="Build Failed Dialogue"
+            status={message?.success ? 'success': 'failure'}
+          />: null;
 }
 
 export default App;
