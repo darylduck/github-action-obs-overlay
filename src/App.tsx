@@ -26,14 +26,20 @@ function App() {
         setShowMessage(false);
       }, 10000);
     }
-  }, [showMessage])
+  }, [showMessage]);
+
+  const heading = message?.success ? 'Build Succeeded!!!': 'Build Failed!!!';
+  const messageContent = message?.success ? 'That build that was run on the master branch was successful. Keep up the good work!!!!': 'There appears to be an issue with the latest push to the master branch. Please review and fix the build.';
+  const statusLogoAlt = message?.success ? 'Build Succeeded' : 'Build Failed';
+  const statusMessageLogoAlt = message?.success ? 'Build Succeeded Dialogue' : 'Build Failed Dialogue';
+  const buildStatus = message?.success ? 'success': 'failure';
 
   return showMessage ? <BuildStatus
-            heading={'Build Failed!!!'}
-            message="There appears to be an issue with the latest push to the {branchName} branch. Please review and fix the build."
-            statusLogoAlt="Build Failed"
-            statusMessageLogoAlt="Build Failed Dialogue"
-            status={message?.success ? 'success': 'failure'}
+            heading={heading}
+            message={messageContent}
+            statusLogoAlt={statusLogoAlt}
+            statusMessageLogoAlt={statusMessageLogoAlt}
+            status={buildStatus}
           />: null;
 }
 
