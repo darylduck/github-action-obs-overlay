@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/darylduck/github-action-obs-overlay/issues"
   },
-  "homepage": "https://github.com/darylduck/github-action-obs-overlay#readme"
+  "homepage": "https://github.com/darylduck/github-action-obs-overlay#readme",
+  "devDependencies": {
+    "ts-node": "^10.0.0"
+  }
 }
