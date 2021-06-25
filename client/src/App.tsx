@@ -3,7 +3,7 @@ import useWebSocket from "react-use-websocket";
 
 import BuildStatus from "./components/BuildStatus/BuildStatus";
 
-const SOCKET_URL_ONE = "ws://localhost:8080";
+const SOCKET_URL_ONE = "ws://localhost:5000";
 
 function App() {
   const [showMessage, setShowMessage] = useState(false);
