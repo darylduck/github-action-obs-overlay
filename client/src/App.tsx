@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import useWebSocket from "react-use-websocket";
 
-import BuildStatus from "./components/BuildStatus/BuildStatus";
+import BuildStatusLogo from "./components/BuildStatus/BuildStatus";
+import {
+  SOCKET_URL,
+  DISPLAY_DURATION,
+  BUILD_SUCCESS_IMAGE_URL,
+  BUILD_FAILURE_IMAGE_URL
+} from './config';
 
-const SOCKET_URL = `ws://${window.location.host}`;
-
-function App() {
+function App() {  
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState<{ success: boolean }>();
 
@@ -16,7 +20,6 @@ function App() {
   };
 
   useWebSocket(SOCKET_URL, {
-    share: true,
     onMessage: onMessage
   });
 
@@ -24,23 +27,13 @@ function App() {
     if (showMessage) {
       setTimeout(() => {
         setShowMessage(false);
-      }, 10000);
+      }, DISPLAY_DURATION);
     }
   }, [showMessage]);
 
-  const heading = message?.success ? 'Build Succeeded!!!': 'Build Failed!!!';
-  const messageContent = message?.success ? 'That build that was run on the master branch was successful. Keep up the good work!!!!': 'There appears to be an issue with the latest push to the master branch. Please review and fix the build.';
-  const statusLogoAlt = message?.success ? 'Build Succeeded' : 'Build Failed';
-  const statusMessageLogoAlt = message?.success ? 'Build Succeeded Dialogue' : 'Build Failed Dialogue';
-  const buildStatus = message?.success ? 'success': 'failure';
+  const buildLogoUrl = message?.success ? BUILD_SUCCESS_IMAGE_URL : BUILD_FAILURE_IMAGE_URL;  
 
-  return showMessage ? <BuildStatus
-            heading={heading}
-            message={messageContent}
-            statusLogoAlt={statusLogoAlt}
-            statusMessageLogoAlt={statusMessageLogoAlt}
-            status={buildStatus}
-          />: null;
+  return showMessage ? <BuildStatusLogo buildLogoUrl={buildLogoUrl} /> : null;
 }
 
 export default App;
