@@ -6,7 +6,9 @@ import {
   SOCKET_URL,
   DISPLAY_DURATION,
   BUILD_SUCCESS_IMAGE_URL,
-  BUILD_FAILURE_IMAGE_URL
+  BUILD_FAILURE_IMAGE_URL,
+  BUILD_IMAGE_WIDTH,
+  BUILD_IMAGE_HEIGHT
 } from './config';
 
 function App() {  
@@ -33,7 +35,12 @@ function App() {
 
   const buildLogoUrl = message?.success ? BUILD_SUCCESS_IMAGE_URL : BUILD_FAILURE_IMAGE_URL;  
 
-  return showMessage ? <BuildStatusLogo buildLogoUrl={buildLogoUrl} /> : null;
+  return showMessage ? (
+    <BuildStatusLogo 
+      buildLogoUrl={buildLogoUrl}
+      width={BUILD_IMAGE_WIDTH}
+      height={BUILD_IMAGE_HEIGHT} />
+  ) : null;
 }
 
 export default App;
