@@ -20,7 +20,6 @@ function App() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState<{ success: boolean }>();
 
-  // Listen for a websocket message, and on message show either good or bad.
   const onMessage = async (message: any) => {    
     setMessage(JSON.parse(message.data));
     setShowMessage(true);
@@ -54,6 +53,7 @@ function App() {
     <>
       {sound}
       <BuildStatusLogo 
+        animationDuration={Math.ceil(DISPLAY_DURATION * 0.8)}
         buildLogoUrl={buildLogoUrl}
         width={BUILD_IMAGE_WIDTH}
         height={BUILD_IMAGE_HEIGHT} />
