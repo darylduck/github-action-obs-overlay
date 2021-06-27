@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {    
-    "start": "(cd ../client && npm run build) && (cd ../server && tsc && node dist/server.js)",
+  "scripts": {
+    "start": "nodemon server.ts",
     "start:dev": "env-cmd -f .env nodemon server.ts"
   },
   "keywords": [],
