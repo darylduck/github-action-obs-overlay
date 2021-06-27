@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "env-cmd -f .env nodemon server.ts"
+    "start": "nodemon server.ts",
+    "start:dev": "env-cmd -f .env nodemon server.ts"
   },
   "keywords": [],
   "author": "",
